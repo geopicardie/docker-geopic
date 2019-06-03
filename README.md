@@ -40,6 +40,18 @@ par exemple pour mapproxy:
 docker-compose up -d --build mapproxy
 ```
 
-# Demanderi/renouveller un certificat HTTPS
+# Demander/renouveller un certificat HTTPS
 
-TODO
+Il faut utiliser le certbot installé dansl'image ssl
+
+Renouvellement:
+
+```bash
+docker-compose exec ssl certbot renew --post-hook 'nginx -s reload'
+```
+
+Création:
+```bash
+docker-compose exec ssl bash
+certbot --nginx certonly --preferred-challenges http -d osm.geo2france.fr -d osm.geopicardie.fr --expand
+```
